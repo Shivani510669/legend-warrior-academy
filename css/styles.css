@@ -1226,6 +1226,7 @@ footer {
 
     .hero-content {
         padding: 1.5rem;
+        text-align: center !important;
     }
 
     .hero-logo {
@@ -1979,4 +1980,99 @@ footer {
 
 .mobile-footer-bar i {
     font-size: 1rem;
+}
+/* Hide by default */
+.swipe-hint {
+    display: none !important;
+}
+
+/* Sections relative */
+#programs,
+#gallery {
+    position: relative;
+}
+
+/* Mobile only */
+@media (max-width: 768px) {
+
+    #programs .swipe-hint,
+    #gallery .swipe-hint {
+        display: block !important;
+    }
+
+    .swipe-hint {
+        position: absolute;
+        top: 63.5%;
+        transform: translateY(-50%);
+        font-size: 18px;
+        font-weight: 600;
+        color: #d4af37;
+        pointer-events: none;
+        z-index: 10;
+        opacity: 0.8;
+        animation: swipeMove 1.2s infinite;
+
+        /* Default (right side) */
+        right: 4px;
+        left: auto;
+    }
+
+    /* When on left */
+    .swipe-hint.left-side {
+        left: 4px;
+        right: auto;
+        animation: swipeMoveLeft 1.2s infinite;
+    }
+
+    /* Right animation */
+    @keyframes swipeMove {
+        0% {
+            transform: translate(0, -50%);
+            opacity: 0.3;
+        }
+        50% {
+            transform: translate(-4px, -50%);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(0, -50%);
+            opacity: 0.3;
+        }
+    }
+
+    /* Left animation */
+    @keyframes swipeMoveLeft {
+        0% {
+            transform: translate(0, -50%);
+            opacity: 0.3;
+        }
+        50% {
+            transform: translate(4px, -50%);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(0, -50%);
+            opacity: 0.3;
+        }
+    }
+
+    /* Horizontal scroll */
+    .program-grid,
+    .gallery-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 15px;
+        padding-bottom: 10px;
+    }
+
+    .program-card,
+    .gallery-item {
+        min-width: 260px;
+        flex-shrink: 0;
+    }
+
+    .program-grid::-webkit-scrollbar,
+    .gallery-grid::-webkit-scrollbar {
+        display: none;
+    }
 }

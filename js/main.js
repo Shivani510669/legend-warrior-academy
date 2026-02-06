@@ -298,3 +298,50 @@ document.addEventListener("click", (e) => {
     }
 });
 
+function setupSwipeHint(container, hintId) {
+
+    const box = document.querySelector(container);
+    const hint = document.getElementById(hintId);
+
+    if (!box || !hint) return;
+
+    function update() {
+
+        const max = box.scrollWidth - box.clientWidth;
+
+        /* Desktop hide */
+        if (window.innerWidth > 768) {
+            hint.style.display = "none";
+            return;
+        }
+
+        hint.classList.remove("left-side");
+
+        /* At start */
+        if (box.scrollLeft <= 5) {
+            hint.textContent = ">>";
+            hint.style.display = "block";
+        }
+
+        /* At end */
+        else if (box.scrollLeft >= max - 5) {
+            hint.textContent = "<<";
+            hint.classList.add("left-side");
+            hint.style.display = "block";
+        }
+
+        /* Middle */
+        else {
+            hint.textContent = ">>";
+            hint.style.display = "block";
+        }
+    }
+
+    box.addEventListener("scroll", update);
+    window.addEventListener("resize", update);
+
+    update();
+}
+
+setupSwipeHint("#programs .program-grid", "programHint");
+setupSwipeHint("#gallery .gallery-grid", "galleryHint");
